@@ -1,3 +1,4 @@
+namespace Hourglass.Site.Configuration;
 public class JwtSettings
 {
     public string Issuer { get; set; }

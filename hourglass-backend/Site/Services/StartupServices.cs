@@ -1,6 +1,5 @@
 using Hourglass.Site.JwtFeatures;
 using Hourglass.Site.Repositories;
-using VerifyEmailForgotPasswordTutorial.Services;
 
 namespace Hourglass.Site.Services;
 

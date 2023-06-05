@@ -1,6 +1,5 @@
-using Hourglass.Site.Entities;
+using Hourglass.Site.Configuration;
 using Microsoft.AspNetCore.Identity;
-using VerifyEmailForgotPasswordTutorial.Configuration;
 
 namespace Microsoft.Extensions.DependencyInjection;
 

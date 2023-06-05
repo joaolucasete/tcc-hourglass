@@ -1,15 +1,16 @@
 ﻿using AutoMapper;
 using Hangfire;
 using Hourglass.Api.Auth;
+using Hourglass.Site.Configuration;
 using Hourglass.Site.Entities;
 using Hourglass.Site.JwtFeatures;
+using Hourglass.Site.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Options;
 using System.IdentityModel.Tokens.Jwt;
-using VerifyEmailForgotPasswordTutorial.Services;
 
 namespace Hourglass.Site.Controllers {
 	[Route("api/v1/auth")]

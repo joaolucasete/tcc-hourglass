@@ -1,12 +1,12 @@
 ﻿using Azure;
 using Azure.Communication.Email;
+using Hourglass.Site.Configuration;
 using Microsoft.Extensions.Options;
 using System.Collections.Concurrent;
 using System.Text;
 using System.Text.RegularExpressions;
-using VerifyEmailForgotPasswordTutorial.Configuration;
 
-namespace VerifyEmailForgotPasswordTutorial.Services {
+namespace Hourglass.Site.Services {
 	public enum EmailTypes {
 		Verify,
 		ForgotPassword

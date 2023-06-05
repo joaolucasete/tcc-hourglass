@@ -19,3 +19,5 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "Hourglass.Site.dll"]
+# Test purposes
+# ENTRYPOINT ["tail", "-f", "/dev/null"] 
