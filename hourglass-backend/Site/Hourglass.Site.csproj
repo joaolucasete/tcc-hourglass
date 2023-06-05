@@ -5,13 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <UserSecretsId>4628a236-92f6-4878-9a24-e661047e445b</UserSecretsId>
-    <IncludeSymbols>true</IncludeSymbols>
-    <EmbedAllSources>true</EmbedAllSources>
   </PropertyGroup>
-  <ItemGroup>
-    <!-- We need to exclude .resx files from this logic, since .NET SDK includes them by default. Otherwise, we would get a "duplicate items" error -->
-    <EmbeddedResource Include="Resources\**" Exclude="**\*.resx" />
-  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
     <PackageReference Include="Azure.Communication.Email" Version="1.0.0" />
@@ -47,5 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Api\Hourglass.Api.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\EmailTemplates\*" />
   </ItemGroup>
 </Project>
