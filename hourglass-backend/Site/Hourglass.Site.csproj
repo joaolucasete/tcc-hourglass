@@ -48,8 +48,4 @@
   <ItemGroup>
     <ProjectReference Include="..\Api\Hourglass.Api.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <!-- We need to exclude .resx files from this logic, since .NET SDK includes them by default. Otherwise, we would get a "duplicate items" error -->
-    <EmbeddedResource Include="Resources\**" Exclude="**\*.resx" />
-  </ItemGroup>
 </Project>
