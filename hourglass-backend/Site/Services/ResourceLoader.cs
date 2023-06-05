@@ -34,7 +34,7 @@ namespace Hourglass.Site.Services {
 			Console.WriteLine(resourceFullName);
 			var stream = assembly.GetManifestResourceStream(resourceFullName);
 			if (stream == null) {
-				logger.LogWarning($"Could not load embedded file \"{path}\" (resourceFullName: {resourceFullName}, assembly: {assembly.FullName})");
+				logger.LogWarning($"Could not load embedded file \"{fileName}\" (resourceFullName: {resourceFullName}, assembly: {assembly.FullName})");
 				return null;
 			}
 			using var reader = new StreamReader(stream);
