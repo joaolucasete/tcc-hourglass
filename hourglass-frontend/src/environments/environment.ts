@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  urlAddress: 'https://localhost:44359'
+  urlAddress: 'http://hourglass.codando.engineer:8080',
+  clientURI: 'http://localhost:4200'
 };
 
 /*

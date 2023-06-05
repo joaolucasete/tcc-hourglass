@@ -3,6 +3,7 @@ import { ForgotPasswordDto } from './../../_interfaces/resetPassword/forgotPassw
 import { AuthenticationService } from './../../shared/services/authentication.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-forgot-password',
@@ -15,9 +16,9 @@ export class ForgotPasswordComponent implements OnInit {
   errorMessage: string;
   showSuccess: boolean;
   showError: boolean;
-  
+
   constructor(private _authService: AuthenticationService) { }
-  
+
   ngOnInit(): void {
     this.forgotPasswordForm = new FormGroup({
       email: new FormControl("", [Validators.required])
@@ -38,18 +39,19 @@ export class ForgotPasswordComponent implements OnInit {
 
     const forgotPassDto: ForgotPasswordDto = {
       email: forgotPass.email,
-      clientURI: 'http://localhost:4200/authentication/resetpassword'
+      clientURI: `${environment.clientURI}/authentication/resetpassword`
     }
 
     this._authService.forgotPassword('api/v1/auth/forgot-password', forgotPassDto)
-    .subscribe({
-      next: (_) => {
-      this.showSuccess = true;
-      this.successMessage = 'The link has been sent, please check your email to reset your password.'
-    },
-    error: (err: HttpErrorResponse) => {
-      this.showError = true;
-      this.errorMessage = err.message;
-    }})
+      .subscribe({
+        next: (_) => {
+          this.showSuccess = true;
+          this.successMessage = 'The link has been sent, please check your email to reset your password.'
+        },
+        error: (err: HttpErrorResponse) => {
+          this.showError = true;
+          this.errorMessage = err.message;
+        }
+      })
   }
 }

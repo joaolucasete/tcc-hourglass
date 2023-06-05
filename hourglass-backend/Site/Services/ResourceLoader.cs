@@ -17,6 +17,7 @@
         public string GetEmailTemplate(string fileName)
         {
             var path = Path.Combine(env.ContentRootPath, "Resources", "EmailTemplates", fileName);
+			Console.WriteLine(path);
             try
             {
 

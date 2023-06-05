@@ -9,10 +9,10 @@ import { AuthenticationService } from './shared/services/authentication.service'
 export class AppComponent implements OnInit {
   title = 'AngularClient';
 
-  constructor(private authService: AuthenticationService){}
-  
+  constructor(private authService: AuthenticationService) { }
+
   ngOnInit(): void {
-    if(this.authService.isUserAuthenticated())
+    if (this.authService.isUserAuthenticated())
       this.authService.sendAuthStateChangeNotification(true);
   }
 }
