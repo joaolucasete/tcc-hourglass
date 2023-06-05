@@ -10,6 +10,10 @@ on:
     tags:
       - v*
 
+defaults:
+  run:
+    working-directory: hourglass-backend
+
 env:
   REGISTRY: ghcr.io
 
