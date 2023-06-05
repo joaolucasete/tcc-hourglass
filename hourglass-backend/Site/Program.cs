@@ -86,8 +86,7 @@ app.UseHangfireDashboard();
 
 app.MapControllers();
 
-await app.CreateRolesAsync();
-await app.InsertDataAsync();
+await app.InitializeDatabaseAsync();
 
 app.Run();
 
