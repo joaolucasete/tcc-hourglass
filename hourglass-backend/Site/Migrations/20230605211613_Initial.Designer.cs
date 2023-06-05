@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Hourglass.Site.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230605014739_Initial")]
+    [Migration("20230605211613_Initial")]
     partial class Initial
     {
         /// <inheritdoc />

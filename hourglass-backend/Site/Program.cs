@@ -36,12 +36,10 @@ builder.Services.AddHangfire(config =>
 	.UseRecommendedSerializerSettings()
 	.UsePostgreSqlStorage(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddHangfireServer();
-builder.Services.Configure<CorsOptions>(corsOptions =>
-{
-    corsOptions.AddPolicy("AllowAll", policy =>
-    {
-        policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
-    });
+builder.Services.Configure<CorsOptions>(corsOptions => {
+	corsOptions.AddPolicy("AllowAll", policy => {
+		policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+	});
 });
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -87,11 +85,10 @@ app.UseCors(policy => policy
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.UseHangfireDashboard();
-
 app.MapControllers();
 
 await app.InitializeDatabaseAsync();
+app.UseHangfireDashboard();
 
 app.Run();
 
