@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  urlAddress: 'http://www.companyemployees_client.com'
+  urlAddress: 'http://hourglass.codando.engineer:8080'
 };
