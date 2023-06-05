@@ -31,8 +31,6 @@ namespace Hourglass.Site.Services {
 #else
 			var assembly = Assembly.GetEntryAssembly();
 			var resourceFullName = $"{assembly.GetName().Name}.Resources.EmailTemplates.{fileName}";
-			var resources = assembly.GetManifestResourceNames();
-			Console.WriteLine(resourceFullName);
 			var stream = assembly.GetManifestResourceStream(resourceFullName);
 			if (stream == null) {
 				logger.LogWarning($"Could not load embedded file \"{fileName}\" (resourceFullName: {resourceFullName}, assembly: {assembly.FullName})");
