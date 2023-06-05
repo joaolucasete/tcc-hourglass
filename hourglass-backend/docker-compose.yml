@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+  web:
+    image: hourglass
+    environment:
+      - ConnectionStrings__DefaultConnection=Server=db; Database=hourglass; Port=5432;user id=postgres; password=PostgresPssw!; Pooling=true;Minimum Pool Size=0;Maximum Pool Size=25;
+    build:
+      context: .
+      dockerfile: Site/Dockerfile
+    ports:
+      - 8080:80
+    depends_on:
+      db:
+        condition: service_healthy    
+    networks:
+      - hourglass-network
+
+  db:
+    image: postgres:14-alpine
+    environment:
+      - POSTGRES_PASSWORD=PostgresPssw!
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+
+  redis:
+    image: redis:alpine
+
+networks:
+  hourglass-network:
+    driver: bridge
