@@ -4,10 +4,6 @@ on:
     branches:
     - main
 
-defaults:
-  run:
-    working-directory: hourglass-backend
-
 env:
   AZURE_WEBAPP_NAME: HourglassSite20230606112516
   AZURE_WEBAPP_PACKAGE_PATH: Site\publish
@@ -23,7 +19,7 @@ env:
   API_IMPORT_VERSION: v1
   CONFIGURATION: Release
   DOTNET_CORE_VERSION: 7.0.x
-  WORKING_DIRECTORY: Site
+  WORKING_DIRECTORY: hourglass-backend\Site
 jobs:
   build:
     runs-on: windows-latest
