@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "AngularClient": {
+    "HourglassApp": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/angular-client",
+            "outputPath": "dist/hourglass-app",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -66,10 +66,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "AngularClient:build:production"
+              "browserTarget": "HourglassApp:build:production"
             },
             "development": {
-              "browserTarget": "AngularClient:build:development"
+              "browserTarget": "HourglassApp:build:development"
             }
           },
           "defaultConfiguration": "development",
@@ -80,7 +80,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "AngularClient:build"
+            "browserTarget": "HourglassApp:build"
           }
         },
         "test": {
@@ -103,5 +103,5 @@
       }
     }
   },
-  "defaultProject": "AngularClient"
+  "defaultProject": "HourglassApp"
 }

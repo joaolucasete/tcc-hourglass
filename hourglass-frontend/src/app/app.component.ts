@@ -7,7 +7,7 @@ import { AuthenticationService } from './shared/services/authentication.service'
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'AngularClient';
+  title = 'HourglassApp';
 
   constructor(private authService: AuthenticationService) { }
 

@@ -1,13 +1,12 @@
 {
-  "name": "angular-client",
+  "name": "hourglassapp",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "build:prod": "ng build --configuration production --base-href https://rodrigokamada.github.io/angular-github-actions/"
+    "test": "ng test"
   },
   "private": true,
   "dependencies": {
