@@ -6,7 +6,6 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:7.0-alpine AS build
 WORKDIR /src
 COPY ["Site/Hourglass.Site.csproj", "Site/"]
-COPY ["Api/Hourglass.Api.csproj", "Api/"]
 RUN dotnet restore "Site/Hourglass.Site.csproj"
 COPY . .
 WORKDIR "/src/Site"

@@ -41,7 +41,4 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\EmailTemplates\VerifyEmail.html" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Api\Hourglass.Api.csproj" />
-  </ItemGroup>
 </Project>
