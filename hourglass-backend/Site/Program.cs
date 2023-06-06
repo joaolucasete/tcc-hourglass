@@ -77,10 +77,7 @@ if (app.Environment.IsDevelopment()) {
 
 app.UseHttpsRedirection();
 // configure cors
-app.UseCors(policy => policy
-	.AllowAnyOrigin()
-	.AllowAnyMethod()
-	.AllowAnyHeader());
+app.UseCors("AllowAll");
 
 app.UseAuthentication();
 app.UseAuthorization();
