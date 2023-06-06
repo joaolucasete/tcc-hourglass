@@ -44,6 +44,7 @@ builder.Services.Configure<CorsOptions>(corsOptions => {
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+
 builder.Services.AddSwaggerGen(options => {
 	options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme() {
 		Type = SecuritySchemeType.ApiKey,
@@ -64,6 +65,13 @@ builder.Services.AddSwaggerGen(options => {
 			},
 			new List<string>()
 		}
+	});
+});
+
+builder.Services.ConfigureSwaggerGen(setup => {
+	setup.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo {
+		Title = "Hourglass API",
+		Version = "v1",
 	});
 });
 
