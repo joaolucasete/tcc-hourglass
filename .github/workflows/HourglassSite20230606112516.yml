@@ -3,6 +3,11 @@ on:
   push:
     branches:
     - main
+
+defaults:
+  run:
+    working-directory: hourglass-backend
+
 env:
   AZURE_WEBAPP_NAME: HourglassSite20230606112516
   AZURE_WEBAPP_PACKAGE_PATH: Site\publish
