@@ -147,6 +147,7 @@ namespace Hourglass.Site.Controllers {
 		}
 
 		[HttpPost("reset-password")]
+		[AllowAnonymous]
 		public async Task<IActionResult> ResetPassword(ResetPasswordRequest request) {
 
 			var user = await userManager.FindByEmailAsync(request.Email);

@@ -5,6 +5,7 @@ import { PasswordConfirmationValidatorService } from './../../shared/custom-vali
 import { AuthenticationService } from './../../shared/services/authentication.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-reset-password',
@@ -44,7 +45,7 @@ export class ResetPasswordComponent implements OnInit {
     return this.resetPasswordForm.get(controlName).hasError(errorName)
   }
 
-  public resetPassword = (resetPasswordFormValue) => {
+  public resetPassword = async (resetPasswordFormValue) => {
     this.showError = this.showSuccess = false;
     const resetPass = { ...resetPasswordFormValue };
 
@@ -57,10 +58,12 @@ export class ResetPasswordComponent implements OnInit {
 
     this.authService.resetPassword('api/v1/auth/reset-password', resetPassDto)
       .subscribe({
-        next: (_) => this.showSuccess = true,
+        next: (_) => {
+          this.showSuccess = true;
+        },
         error: (err: HttpErrorResponse) => {
           this.showError = true;
-          this.errorMessage = err.message;
+          this.errorMessage = err.name;
         }
       })
   }
