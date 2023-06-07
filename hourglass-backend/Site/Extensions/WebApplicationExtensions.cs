@@ -1,4 +1,5 @@
 ﻿using Bogus;
+using Hourglass.Site.Classes;
 using Hourglass.Site.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -47,8 +48,8 @@ public static class WebApplicationExtensions {
 			await userManager.AddToRoleAsync(adminUser, "Admin");
 
 			var dummyServiceCategory = new ServiceCategory {
-				Id = Guid.NewGuid(),
-				Name = "Programação",
+				Id = Util.GetDefaultServiceCategoryGuid(),
+				Name = "Others",
 				CreatedAt = DateTime.UtcNow,
 				UpdatedAt = DateTime.UtcNow,
 			};

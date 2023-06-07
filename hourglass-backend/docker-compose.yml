@@ -25,9 +25,11 @@ services:
       interval: 10s
       timeout: 5s
       retries: 6
+    networks:
+      - hourglass-network
 
-  redis:
-    image: redis:alpine
+  # redis:
+  #   image: redis:alpine
 
 networks:
   hourglass-network:

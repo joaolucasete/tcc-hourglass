@@ -14,5 +14,8 @@ public class Util {
 						 .Where(x => x % 2 == 0)
 						 .Select(x => Convert.ToByte(hex.Substring(x, 2), 16))
 						 .ToArray();
+
+	public static Guid GetDefaultServiceCategoryGuid()
+		=> Guid.Parse("a2f8291f-85c6-4e1c-a70f-27763eaeeda3");
 }
 

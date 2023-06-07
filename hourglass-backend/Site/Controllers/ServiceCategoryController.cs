@@ -1,4 +1,5 @@
 ﻿using Hourglass.Site.Entities;
+using Hourglass.Site.Models.ServiceCategory;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using static Hourglass.Site.Classes.Dtos;
@@ -58,18 +59,12 @@ namespace Hourglass.Site.Controllers {
 		// POST: api/v1/service-categories
 		// Create a new service category
 		[HttpPost]
-		public async Task<ActionResult<ServiceCategoryDto>> CreateServiceCategory(ServiceCategoryDto serviceCategoryDto) {
-			// Validate the input DTO
-			if (!ModelState.IsValid) {
-				return BadRequest(ModelState);
-			}
+		public async Task<ActionResult> CreateServiceCategory(ServiceCategoryCreateRequest request) {
 
 			// Map the DTO to an entity
 			var serviceCategory = new ServiceCategory {
 				Id = Guid.NewGuid(),
-				Name = serviceCategoryDto.Name,
-				CreatedAt = DateTimeOffset.UtcNow,
-				UpdatedAt = DateTimeOffset.UtcNow
+				Name = request.Name,
 			};
 
 			// Add the entity to the database context
@@ -79,18 +74,13 @@ namespace Hourglass.Site.Controllers {
 			await dbContext.SaveChangesAsync();
 
 			// Return the created DTO with 201 status code and location header
-			return CreatedAtAction(nameof(GetServiceCategory), new { id = serviceCategory.Id }, serviceCategoryDto);
+			return CreatedAtAction(nameof(GetServiceCategory), new { id = serviceCategory.Id });
 		}
 
 		// PUT: api/v1/service-categories/{id}
 		// Update an existing service category by id
 		[HttpPut("{id}")]
-		public async Task<IActionResult> UpdateServiceCategory(Guid id, ServiceCategoryDto serviceCategoryDto) {
-			// Validate the input DTO
-			if (!ModelState.IsValid) {
-				return BadRequest(ModelState);
-			}
-
+		public async Task<IActionResult> UpdateServiceCategory(Guid id, ServiceCategoryUpdateRequest request) {
 			// Find the service category entity by id
 			var serviceCategory = await dbContext.ServiceCategories.FindAsync(id);
 
@@ -99,8 +89,9 @@ namespace Hourglass.Site.Controllers {
 				return NotFound();
 			}
 
-			// Map the DTO to the entity
-			serviceCategory.Name = serviceCategoryDto.Name;
+			if (!string.IsNullOrEmpty(request.Name)) {
+				serviceCategory.Name = request.Name;
+			}
 
 			// Update the timestamp
 			serviceCategory.UpdatedAt = DateTimeOffset.UtcNow;

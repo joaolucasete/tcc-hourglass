@@ -36,12 +36,14 @@ namespace Hourglass.Site.Services {
 				UpdatedAt = service.UpdatedAt,
 				ServiceCategory = service.ServiceCategory.Name,
 				UserName = service.User.Name,
+				ContactLink = service.ContactLink,
 			};
 
 		public UserModel ToModel(User user)
 			=> new() {
 				Id = user.Id,
 				Name = user.Name,
+				Cpf = user.Cpf,
 				State = user.State,
 				Country = user.Country,
 				City = user.City,

@@ -9,6 +9,7 @@ public class Service {
 
 	public string Name { get; set; }
 	public string Description { get; set; }
+	public string ContactLink { get; set; }
 
 	public Guid UserId { get; set; }
 	public User User { get; set; }
@@ -23,7 +24,7 @@ public class Service {
 
 	#region CreatedAt
 	[NotMapped]
-	public DateTimeOffset CreatedAt { get; set; }
+	public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.UtcNow;
 
 	public DateTime CreatedAtDate {
 		get => CreatedAt.UtcDateTime;
@@ -33,7 +34,7 @@ public class Service {
 
 	#region UpdatedAt
 	[NotMapped]
-	public DateTimeOffset UpdatedAt { get; set; }
+	public DateTimeOffset UpdatedAt { get; set; } = DateTimeOffset.UtcNow;
 	public DateTime UpdatedAtDate {
 		get => UpdatedAt.UtcDateTime;
 		set => UpdatedAt = new DateTimeOffset(value, TimeSpan.Zero);

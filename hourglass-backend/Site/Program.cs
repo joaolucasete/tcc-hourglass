@@ -34,7 +34,7 @@ builder.Services.AddHangfire(config =>
 	.SetDataCompatibilityLevel(CompatibilityLevel.Version_180)
 	.UseSimpleAssemblyNameTypeSerializer()
 	.UseRecommendedSerializerSettings()
-	.UsePostgreSqlStorage(builder.Configuration.GetConnectionString("DefaultConnection")));
+	.UseSqlServerStorage(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddHangfireServer();
 builder.Services.Configure<CorsOptions>(corsOptions => {
 	corsOptions.AddPolicy("AllowAll", policy => {

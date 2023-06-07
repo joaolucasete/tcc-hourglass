@@ -11,18 +11,18 @@ public class ServiceCategory
 
     #region CreatedAt
     [NotMapped]
-    public DateTimeOffset CreatedAt { get; set; }
+    public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.UtcNow;
 
     public DateTime CreatedAtDate
     {
         get => CreatedAt.UtcDateTime;
         set => CreatedAt = new DateTimeOffset(value, TimeSpan.Zero);
     }
-    #endregion
+	#endregion
 
-    #region UpdatedAt
-    [NotMapped]
-    public DateTimeOffset UpdatedAt { get; set; }
+	#region UpdatedAt
+	[NotMapped]
+	public DateTimeOffset UpdatedAt { get; set; } = DateTimeOffset.UtcNow;
     public DateTime UpdatedAtDate
     {
         get => UpdatedAt.UtcDateTime;

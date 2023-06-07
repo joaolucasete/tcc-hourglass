@@ -2,6 +2,9 @@ using Microsoft.AspNetCore.Mvc;
 using Hourglass.Site.Entities;
 using Hourglass.Site.Services;
 using Hourglass.Api.Service;
+using Hourglass.Site.Models.Service;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Hourglass.Site.Controllers;
 
@@ -10,45 +13,66 @@ namespace Hourglass.Site.Controllers;
 public class ServiceController : ControllerBase {
 	private readonly ServiceService serviceService;
 	private readonly ModelConverter mc;
+	private readonly AppDbContext appDbContext;
 
 	public ServiceController(
 		ServiceService serviceService,
-		ModelConverter mc
+		ModelConverter mc,
+		AppDbContext appDbContext
 	) {
 		this.serviceService = serviceService;
 		this.mc = mc;
+		this.appDbContext = appDbContext;
 	}
 
 	// GET: api/v1/services
 	[HttpGet]
 	public async Task<List<ServiceSummary>> GetServices() {
-		var services = await serviceService.GetServices();
+		var services = await serviceService.GetServicesAsync();
 		return services.Select(mc.ToSummary).ToList();
 	}
 
 	// GET: api/v1/services/:id
 	[HttpGet("{id}")]
-	public async Task<ActionResult<Service>> GetService(Guid id) {
-		var service = await serviceService.GetService(id);
+	public async Task<ActionResult<ServiceSummary>> GetService(Guid id) {
+		var service = await serviceService.GetServiceAsync(id);
 		if (service == null) {
 			return NotFound();
 		}
-		return Ok(service);
+		return mc.ToSummary(service);
 	}
 
 	// POST: api/v1/services
 	[HttpPost]
-	public async Task<ActionResult<Service>> CreateService(Service service) {
-		var createdService = await serviceService.CreateService(service);
-		return CreatedAtAction(nameof(GetService), new { id = createdService.Id }, createdService);
+	public async Task<ActionResult> CreateService(ServiceCreateRequest request) {
+		var createdService = await serviceService.CreateServiceAsync(request);
+		return NoContent();
 	}
 
 	// PUT: api/v1/services/:id
 	[HttpPut("{id}")]
-	public async Task<ActionResult<Service>> UpdateService(Guid id, Service service) {
+	public async Task<ActionResult> UpdateService(Guid id, ServiceUpdateRequest request) {
 		try {
-			var updatedService = await serviceService.UpdateService(id, service);
-			return Ok(updatedService);
+			var service = await appDbContext.Services.FirstOrDefaultAsync(s => s.Id == id);
+			if (service == null) {
+				return NotFound();
+			}
+
+			if (!string.IsNullOrEmpty(request.Name)) {
+				service.Name = request.Name;
+			}
+			if (request.Price.HasValue) {
+				service.Price = request.Price.Value;
+			}
+			if (!string.IsNullOrEmpty(request.ContactLink)) {
+				service.ContactLink = request.ContactLink;
+			}
+
+			service.UpdatedAt = DateTimeOffset.UtcNow;
+
+			await appDbContext.SaveChangesAsync();
+
+			return NoContent();
 		} catch (ArgumentException ex) {
 			return BadRequest(ex.Message);
 		}

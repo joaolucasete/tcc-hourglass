@@ -19,7 +19,8 @@ public class AppDbContext : IdentityDbContext<User, Role, Guid> {
 	}
 
 	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
-		optionsBuilder.UseNpgsql(configuration.GetConnectionString("DefaultConnection"));
+		//optionsBuilder.UseNpgsql(configuration.GetConnectionString("DefaultConnection"));
+		optionsBuilder.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
 	}
 
 	protected override void OnModelCreating(ModelBuilder modelBuilder) {
@@ -36,10 +37,16 @@ public class AppDbContext : IdentityDbContext<User, Role, Guid> {
 		modelBuilder.Entity<Review>()
 			.HasOne(r => r.ConsumedService) // Specify the navigation property
 			.WithOne(c => c.Review) // Specify the inverse navigation property
-			.HasForeignKey<Review>(r => r.ConsumedServiceId); // Specify the foreign key property
+			.HasForeignKey<Review>(r => r.ConsumedServiceId) // Specify the foreign key property
+			.OnDelete(DeleteBehavior.NoAction);
 
 		modelBuilder.Entity<ConsumedService>()
 			.HasKey(c => c.Id); // Specify the primary key property
+
+		modelBuilder.Entity<ConsumedService>()
+			.HasOne(cs => cs.Service)
+			.WithMany()
+			.OnDelete(DeleteBehavior.NoAction);
 
 		// user has a list of services
 		modelBuilder.Entity<User>()
