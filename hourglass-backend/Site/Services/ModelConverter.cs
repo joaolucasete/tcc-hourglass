@@ -1,13 +1,18 @@
 ﻿using Hourglass.Api.Review;
 using Hourglass.Api.Service;
 using Hourglass.Api.User;
+using Hourglass.Site.Configuration;
 using Hourglass.Site.Entities;
+using Microsoft.Extensions.Options;
 
 namespace Hourglass.Site.Services {
 	public class ModelConverter {
+		private readonly IOptions<AppGeneralConfig> generalConfig;
 
-		public ModelConverter() {
-
+		public ModelConverter(
+			IOptions<AppGeneralConfig> generalConfig
+		) {
+			this.generalConfig = generalConfig;
 		}
 
 		public ReviewModel ToModel(Review review)
@@ -36,6 +41,7 @@ namespace Hourglass.Site.Services {
 				UpdatedAt = service.UpdatedAt,
 				ServiceCategory = service.ServiceCategory.Name,
 				UserName = service.User.Name,
+				UserPictureId = service.User.PictureUploadId,
 				ContactLink = service.ContactLink,
 			};
 
@@ -54,6 +60,7 @@ namespace Hourglass.Site.Services {
 				Phone = user.Phone,
 				PostalCode = user.PostalCode,
 				Street = user.Street,
+				PictureUploadId = user.PictureUploadId,
 				Services = user.Services?.Select(ToSummary).ToList(),
 			};
 	}

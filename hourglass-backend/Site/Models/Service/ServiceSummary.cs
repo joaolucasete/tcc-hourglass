@@ -14,6 +14,7 @@ namespace Hourglass.Api.Service {
 		public float Price { get; set; }
 		public string ServiceCategory { get; set; }
 		public string UserName { get; set; }
+		public Guid? UserPictureId { get; set; }
 		public string ContactLink { get; set; }
 		public DateTimeOffset CreatedAt { get; set; }
 		public DateTimeOffset UpdatedAt { get; set; }

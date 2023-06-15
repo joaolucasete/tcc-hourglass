@@ -24,6 +24,7 @@ namespace Hourglass.Api.User {
 		public string PostalCode { get; set; }
 
 		public List<ServiceSummary> Services { get; set; }
+		public Guid? PictureUploadId { get; set; }
 
 
 		//public List<ConsumedService> ConsumedServices { get; set; }

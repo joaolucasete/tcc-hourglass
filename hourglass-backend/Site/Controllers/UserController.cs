@@ -1,3 +1,4 @@
+using Azure.Core;
 using Hourglass.Api.User;
 using Hourglass.Site.Classes;
 using Hourglass.Site.Entities;
@@ -42,7 +43,7 @@ public class UserController : ControllerBase {
 		var userName = User.GetName();
 		var user = await userManager.Users.FirstOrDefaultAsync(u => u.UserName == userName);
 		if (user == null) {
-			return NotFound();
+			return Unauthorized();
 		}
 
 		if (!string.IsNullOrEmpty(request.Name)) {
@@ -51,9 +52,55 @@ public class UserController : ControllerBase {
 		if (!string.IsNullOrEmpty(request.Address)) {
 			user.Street = request.Address;
 		}
+		if (request.PictureUploadId != null) {
+			user.PictureUploadId = request.PictureUploadId;
+		}
+
 		user.UpdatedAt = DateTimeOffset.UtcNow;
 
 		await appDbContext.SaveChangesAsync();
 		return NoContent();
 	}
+
+	//[Authorize]
+	//[DisableFormValueModelBinding]
+	//[HttpPost("me/picture")]
+	//public async Task<IActionResult> UploadProfilePicture(IFormFile fileTest) {
+	//	var a = fileTest;
+	//	var userName = User.GetName();
+	//	var user = await userManager.Users.FirstOrDefaultAsync(u => u.UserName == userName);
+	//	if (user == null) {
+	//		return Unauthorized();
+	//	}
+	//	var picture = Request.Form.Files.FirstOrDefault();
+
+	//	if (picture?.Length > 0) {
+	//		using var memoryStream = new MemoryStream();
+	//		await picture.CopyToAsync(memoryStream);
+	//		if (memoryStream.Length < 2_097_152) {
+	//			user.PictureSource = memoryStream.ToArray();
+	//		} else {
+	//			return BadRequest("Picture file is too large");
+	//		}
+	//	}
+
+	//	await appDbContext.SaveChangesAsync();
+
+	//	return Ok();
+	//}
+
+	//[Authorize]
+	//[HttpGet("me/picture")]
+	//public async Task<IActionResult> GetMyProfilePicture() {
+	//	var userName = User.GetName();
+	//	var user = await userManager.Users.FirstOrDefaultAsync(u => u.UserName == userName);
+	//	if (user == null) {
+	//		return Unauthorized();
+	//	}
+	//	if (user.PictureSource == null) {
+	//		return null;
+	//	}
+
+	//	return File(user.PictureSource, "image/png");
+	//}
 }

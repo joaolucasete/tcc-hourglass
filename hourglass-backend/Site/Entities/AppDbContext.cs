@@ -1,8 +1,3 @@
-using Bogus;
-using Bogus.Extensions.Brazil;
-using Hourglass.Api;
-using Hourglass.Site.Classes;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -80,4 +75,5 @@ public class AppDbContext : IdentityDbContext<User, Role, Guid> {
 	public DbSet<Service> Services { get; set; }
 	public DbSet<ConsumedService> ConsumedServices { get; set; }
 	public DbSet<ServiceCategory> ServiceCategories { get; set; }
+	public DbSet<Upload> Uploads { get; set; }
 }

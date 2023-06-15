@@ -12,6 +12,8 @@ public class User : IdentityUser<Guid> {
 
 	public string Name { get; set; }
 
+	public Guid? PictureUploadId { get; set; }
+
 	public string Phone { get; set; }
 	public string Street { get; set; }
 	public string Number { get; set; }
